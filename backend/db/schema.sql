@@ -68,7 +68,8 @@ CREATE TABLE IF NOT EXISTS identity_documents (
     id                INTEGER PRIMARY KEY AUTOINCREMENT,
     citizen_id        INTEGER NOT NULL REFERENCES citizens (id) ON DELETE CASCADE,
     document_type     TEXT    NOT NULL CHECK (document_type IN ('dowod_osobisty', 'paszport')),
-    series_number     TEXT    NOT NULL,  -- combined series + number (e.g. "ABC 123456")
+    series            TEXT    NOT NULL,  -- letters only (e.g. "ABC"), validated by API
+    number            TEXT    NOT NULL,  -- digits only (e.g. "123456"), validated by API
     issue_date        TEXT    NOT NULL,  -- ISO 8601: YYYY-MM-DD
     expiry_date       TEXT    NOT NULL,  -- ISO 8601: YYYY-MM-DD
     issuing_authority TEXT    NOT NULL,

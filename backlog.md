@@ -198,6 +198,19 @@
 
 ---
 
+### US-06b · Validate Document Series and Number Format
+**As a** clerk,
+**I want** the system to reject invalid series and number formats when adding a document,
+**so that** I cannot accidentally enter a number in the series field or a letter in the number field.
+
+**Acceptance Criteria:**
+- Series field accepts letters only (A–Z); digits are rejected with an error message
+- Number field accepts digits only (0–9); letters are rejected with an error message
+- Validation fires on form submission and shows a clear inline error in Polish
+- Valid input passes through without interruption
+
+---
+
 ### US-07 · View Document History
 **As a** clerk,
 **I want to** view the full history of a citizen's identity documents,
@@ -271,6 +284,6 @@
 | 2. Authentication & Authorization | US-10, US-11 | High — blocks everything |
 | 3. Citizen Record Management | US-01, US-02, US-03, US-04 | High — core functionality |
 | 4. Search & Lookup | US-05a, US-05b, US-05c | High — daily clerk workflow |
-| 5. Identity Documents | US-06, US-07 | Medium |
+| 5. Identity Documents | US-06, US-06b, US-07 | Medium |
 | 6. Registration History | US-08, US-09 | Medium |
 | 7. Audit & Compliance | AUD-01, AUD-02 | High — GDPR obligation |
