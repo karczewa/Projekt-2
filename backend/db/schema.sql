@@ -7,19 +7,6 @@ PRAGMA foreign_keys = ON;
 PRAGMA journal_mode = WAL;
 
 -- -------------------------------------------------------------
--- USERS
--- System accounts: clerks and administrators
--- -------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS users (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    username      TEXT    NOT NULL UNIQUE,
-    password_hash TEXT    NOT NULL,
-    role          TEXT    NOT NULL CHECK (role IN ('administrator', 'clerk')),
-    is_active     INTEGER NOT NULL DEFAULT 1,  -- 0 = deactivated
-    created_at    TEXT    NOT NULL DEFAULT (datetime('now'))
-);
-
--- -------------------------------------------------------------
 -- CITIZENS
 -- Core citizen record. Address fields are embedded.
 -- Date of birth and sex are derived from PESEL and stored.
@@ -112,11 +99,10 @@ CREATE INDEX IF NOT EXISTS idx_reg_citizen ON registration_history (citizen_id);
 -- -------------------------------------------------------------
 -- AUDIT LOG
 -- Immutable record of all operations on citizen data.
--- Covers both modifications (FR-028) and reads (NFR-004).
+-- No user attribution — log is visible to all users.
 -- -------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS audit_log (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id     INTEGER REFERENCES users (id) ON DELETE SET NULL,
     operation   TEXT NOT NULL CHECK (operation IN ('CREATE', 'READ', 'UPDATE', 'DELETE')),
     entity_type TEXT NOT NULL,   -- e.g. 'citizen', 'identity_document', 'registration'
     entity_id   INTEGER,         -- PK of the affected row
@@ -124,6 +110,5 @@ CREATE TABLE IF NOT EXISTS audit_log (
     created_at  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
-CREATE INDEX IF NOT EXISTS idx_audit_user      ON audit_log (user_id);
 CREATE INDEX IF NOT EXISTS idx_audit_entity    ON audit_log (entity_type, entity_id);
 CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_log (created_at);

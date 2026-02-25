@@ -10,7 +10,6 @@
 **so that** I can navigate to the main areas of the system easily.
 
 **Acceptance Criteria:**
-- Front page is displayed after successful login
 - Page contains a top navigation bar with the application name/logo
 - Navigation includes two tabs: **Mieszkańcy** (Citizens) and **Rejestr** (Backlog)
 - All UI text, labels, buttons, and messages are in Polish
@@ -28,7 +27,6 @@
 - Clicking the **Citizens** tab displays the citizen list/search view
 - Default view shows a search bar and an empty results area with a prompt
 - A "Register new citizen" button is visible on this tab
-- Tab is accessible to both clerks and administrators
 
 ---
 
@@ -53,40 +51,11 @@
 
 **Acceptance Criteria:**
 - Clicking the **Rejestr** tab displays the backlog view
-- Tab is accessible to both clerks and administrators
 - Active tab state is preserved on page refresh
 
 ---
 
-## Epic 3: Authentication & Authorization
-
-### US-11 · User Login
-**As a** user,
-**I want to** log in with my credentials,
-**so that** I can access the system securely.
-
-**Acceptance Criteria:**
-- Login form accepts username and password
-- Invalid credentials show an error message
-- Successful login redirects to the dashboard
-- All communication occurs over HTTPS/TLS
-
----
-
-### US-10 · User Account Management
-**As an** administrator,
-**I want to** create, edit, and deactivate user accounts,
-**so that** only authorized personnel can access the system.
-
-**Acceptance Criteria:**
-- Admin can create accounts with role: `clerk` or `administrator`
-- Admin can deactivate (not hard-delete) accounts
-- Admin can reset a user's password
-- Role assignment is required on account creation
-
----
-
-## Epic 4: Citizen Record Management
+## Epic 2: Citizen Record Management
 
 ### US-01 · Register a New Citizen
 **As a** clerk,
@@ -125,7 +94,7 @@
 - All editable fields can be updated (name, contact, correspondence address)
 - PESEL cannot be changed after creation
 - Changes are saved and immediately reflected in the record
-- Modification is recorded in the audit log (user + timestamp)
+- Modification is recorded in the audit log
 
 ---
 
@@ -142,7 +111,7 @@
 
 ---
 
-## Epic 5: Search & Lookup
+## Epic 3: Search & Lookup
 
 ### US-05a · Search by Name
 **As a** clerk,
@@ -182,7 +151,7 @@
 
 ---
 
-## Epic 6: Identity Documents
+## Epic 4: Identity Documents
 
 ### US-06 · Add an Identity Document
 **As a** clerk,
@@ -223,7 +192,7 @@
 
 ---
 
-## Epic 7: Registration History
+## Epic 5: Registration History
 
 ### US-08 · Record an Address Registration Change
 **As a** clerk,
@@ -250,29 +219,29 @@
 
 ---
 
-## Epic 8: Audit & Compliance
+## Epic 6: Audit Log
 
 ### AUD-01 · Audit Log for Data Modifications
-**As an** administrator,
+**As a** user,
 **I want** all data modification operations to be automatically logged,
 **so that** there is a traceable record of every change.
 
 **Acceptance Criteria:**
-- Every create, update, delete operation records: user, timestamp, operation type, affected record
-- Log entries cannot be edited or deleted by any user
-- Log is accessible to administrators
+- Every create, update, delete operation records: timestamp, operation type, affected record
+- Log entries cannot be edited or deleted
+- Log is visible to all users
 
 ---
 
 ### AUD-02 · Audit Log for Record Access
-**As an** administrator,
+**As a** user,
 **I want** all access to citizen records to be logged,
-**so that** compliance with GDPR and data protection laws is maintained.
+**so that** there is a full history of who viewed what and when.
 
 **Acceptance Criteria:**
-- Every view/read of a citizen record records: user, timestamp, record accessed
+- Every view/read of a citizen record records: timestamp, record accessed
 - Log entries cannot be modified
-- Log is queryable by date range and user
+- Log is queryable by date range
 
 ---
 
@@ -280,10 +249,9 @@
 
 | Epic | Stories | Priority |
 |---|---|---|
-| 1. User Layout | UL-01, UL-02, UL-03, UL-04, UL-05 | High — foundation for all UI |
-| 2. Authentication & Authorization | US-10, US-11 | High — blocks everything |
-| 3. Citizen Record Management | US-01, US-02, US-03, US-04 | High — core functionality |
-| 4. Search & Lookup | US-05a, US-05b, US-05c | High — daily clerk workflow |
-| 5. Identity Documents | US-06, US-06b, US-07 | Medium |
-| 6. Registration History | US-08, US-09 | Medium |
-| 7. Audit & Compliance | AUD-01, AUD-02 | High — GDPR obligation |
+| 1. User Layout | UL-01, UL-02, UL-03, UL-05 | High — foundation for all UI |
+| 2. Citizen Record Management | US-01, US-02, US-03, US-04 | High — core functionality |
+| 3. Search & Lookup | US-05a, US-05b, US-05c | High — daily clerk workflow |
+| 4. Identity Documents | US-06, US-06b, US-07 | Medium |
+| 5. Registration History | US-08, US-09 | Medium |
+| 6. Audit Log | AUD-01, AUD-02 | Medium |
