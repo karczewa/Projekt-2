@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  height: 56px;
+  background-color: #1a56db;
+  color: white;
+}
+
+.navbar-logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.navbar-tabs {
+  display: flex;
+  height: 100%;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: white;
+}
+
+.tab--active {
+  color: white;
+  border-bottom-color: white;
+}
